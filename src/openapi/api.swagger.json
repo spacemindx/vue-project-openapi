@@ -1,0 +1,2803 @@
+{
+  "components": {
+    "schemas": {
+      "AuthUser": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/User"
+          },
+          {
+            "properties": {
+              "access_token": {
+                "example": "eyJ0eXAiOiJKV1QiLCJhbG...",
+                "type": "string"
+              },
+              "refresh_token": {
+                "example": "eyJ0eXAiOiJKV1QiLCJhbG...",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "BaseDomain": {
+        "properties": {
+          "g_creds_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "prefix": {
+            "description": "\u041f\u0440\u0435\u0444\u0438\u043a\u0441 \u0434\u043e\u043c\u0435\u043d\u0430. \u041a\u043e\u043d\u0435\u0447\u043d\u044b\u0439 \u0434\u043e\u043c\u0435\u043d \u0431\u0443\u0434\u0435\u0442 \u0441\u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d \u043a\u0430\u043a \u043f\u0440\u0435\u0444\u0438\u043a + \u043a\u043e\u0440\u043d\u0435\u0432\u043e\u0439 \u0434\u043e\u043c\u0435\u043d \u041f\u0440\u043e\u0435\u043a\u0442\u0430",
+            "type": "string"
+          },
+          "project_id": {
+            "type": "integer"
+          },
+          "scheme": {
+            "description": "\u041f\u0440\u043e\u0442\u043e\u043a\u043e\u043b \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f (http|https)",
+            "enum": [
+              "http",
+              "https"
+            ],
+            "type": "string"
+          },
+          "y_creds_id": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ClientUserRole": {
+        "properties": {
+          "client_id": {
+            "description": "ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+            "type": "integer"
+          },
+          "role_id": {
+            "description": "ID \u0440\u043e\u043b\u0438",
+            "type": "integer"
+          },
+          "user_id": {
+            "description": "ID \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Domain": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseDomain"
+          },
+          {
+            "properties": {
+              "update_search_visits": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Error": {
+        "properties": {
+          "detail": {
+            "example": "Any type"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FrequencyParserConfig": {
+        "properties": {
+          "device": {
+            "description": "\u0423\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u043e",
+            "enum": [
+              "all",
+              "desktop",
+              "tablet_phone",
+              "tablet",
+              "phone"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+            "type": "integer"
+          },
+          "regions": {
+            "description": "\u0420\u0435\u0433\u0438\u043e\u043d \u0432\u044b\u0434\u0430\u0447\u0438",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "PositionParserConfig": {
+        "properties": {
+          "device": {
+            "description": "\u0423\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u043e",
+            "enum": [
+              "desktop",
+              "tablet_android",
+              "tablet_ios",
+              "mobile_android",
+              "mobile_ios"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+            "type": "integer"
+          },
+          "language": {
+            "description": "\u042f\u0437\u044b\u043a",
+            "example": "ru",
+            "type": "string"
+          },
+          "region": {
+            "description": "\u0420\u0435\u0433\u0438\u043e\u043d \u0432\u044b\u0434\u0430\u0447\u0438",
+            "example": "\u041c\u043e\u0441\u043a\u0432\u0430",
+            "type": "string"
+          },
+          "search_engine": {
+            "description": "\u041f\u043e\u0438\u0441\u043a\u043e\u0432\u043e\u0439 \u0434\u0432\u0438\u0436\u043e\u043a",
+            "example": "Yandex",
+            "type": "string"
+          },
+          "search_engine_host": {
+            "description": "\u0425\u043e\u0441\u0442 \u0434\u0432\u0438\u0436\u043a\u0430",
+            "example": "yandex.ru",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Project": {
+        "properties": {
+          "brand_queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "client_id": {
+            "type": "integer"
+          },
+          "domains": {
+            "items": {
+              "properties": {
+                "id": {
+                  "example": 1,
+                  "type": "integer"
+                },
+                "url": {
+                  "example": "https://www.domain.com/",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "root_domain": {
+            "example": "some.domain.com",
+            "type": "string"
+          },
+          "segments": {
+            "items": {
+              "example": "/some/path",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ResourceSegment": {
+        "properties": {
+          "domain_id": {
+            "description": "ID \u0434\u043e\u043c\u0435\u043d\u0430",
+            "type": "integer"
+          },
+          "id": {
+            "description": "ID \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430",
+            "type": "integer"
+          },
+          "name": {
+            "description": "\u0418\u043c\u044f \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430",
+            "type": "string"
+          },
+          "regex": {
+            "description": "\u0420\u0435\u0433\u0443\u043b\u044f\u0440\u043d\u043e\u0435 \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "User": {
+        "properties": {
+          "email": {
+            "description": "Email \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0434\u043b\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438",
+            "example": "user@domain.com",
+            "type": "string"
+          },
+          "name": {
+            "description": "\u0418\u043c\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+            "type": "string"
+          },
+          "password": {
+            "description": "\u041f\u0430\u0440\u043e\u043b\u044c",
+            "type": "string"
+          },
+          "second_name": {
+            "description": "\u0424\u0430\u043c\u0438\u043b\u0438\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "VisibilityPreset": {
+        "properties": {
+          "f_conf_id": {
+            "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438",
+            "type": "integer"
+          },
+          "id": {
+            "description": "ID \u043f\u0440\u0435\u0441\u0435\u0442\u0430",
+            "type": "integer"
+          },
+          "p_conf_id": {
+            "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430 \u043f\u043e\u0437\u0438\u0446\u0438\u0439",
+            "type": "integer"
+          },
+          "project_id": {
+            "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+            "type": "integer"
+          },
+          "structure_id": {
+            "description": "ID \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "VisibilityStructure": {
+        "properties": {
+          "id": {
+            "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+            "type": "integer"
+          },
+          "n_queries": {
+            "description": "\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u043e\u0438\u0441\u043a\u043e\u0432\u044b\u0445 \u0437\u0430\u043f\u0440\u043e\u0441\u043e\u0432",
+            "type": "integer"
+          },
+          "name": {
+            "description": "\u0418\u043c\u044f \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http",
+        "x-bearerInfoFunc": "app.api.v1.auth.check_access_token"
+      },
+      "jwt-refresh": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http",
+        "x-bearerInfoFunc": "app.api.v1.auth.check_refresh_token"
+      }
+    }
+  },
+  "info": {
+    "description": "SEO-KIT API v1 \u0434\u043b\u044f \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043a\u043b\u0438\u0435\u043d\u0442\u0441\u043a\u043e\u0439 \u0447\u0430\u0441\u0442\u044c\u044e \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f",
+    "title": "SEO-KIT API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/SearchVisit": {
+      "get": {
+        "description": "\u0417\u0430\u043f\u0440\u0430\u0448\u0438\u0432\u0430\u0435\u0442 \u0430\u0433\u0440\u0435\u0433\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u043f\u043e \u0437\u0430\u043f\u0440\u043e\u0441\u0430\u043c \u0438 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\u043c",
+        "parameters": [
+          {
+            "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+            "in": "query",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "format": "integer",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "\u0414\u0430\u0442\u0430 \u043d\u0430\u0447\u0430\u043b\u0430 (\u0432\u043a\u043b\u044e\u0447\u0430\u0435\u0442\u0441\u044f)",
+            "in": "query",
+            "name": "start_date",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "\u0414\u0430\u0442\u0430 \u043a\u043e\u043d\u0446\u0430 (\u0438\u0441\u043a\u043b\u044e\u0447\u0430\u0435\u0442\u0441\u044f)",
+            "in": "query",
+            "name": "end_date",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "\u041c\u0435\u0442\u043e\u0434 \u0433\u0440\u0443\u043f\u043f\u0438\u0440\u043e\u0432\u043a\u0438",
+            "in": "query",
+            "name": "group_by",
+            "required": true,
+            "schema": {
+              "enum": [
+                "type",
+                "segment"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "\u041c\u0435\u0442\u043e\u0434 \u0433\u0440\u0443\u043f\u043f\u0438\u0440\u043e\u0432\u043a\u0438 \u0434\u0430\u0442",
+            "in": "query",
+            "name": "time_group_by",
+            "required": false,
+            "schema": {
+              "default": "month",
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "year"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "\u0422\u0438\u043f\u044b \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432",
+            "in": "query",
+            "name": "devices",
+            "required": true,
+            "schema": {
+              "default": [
+                "DESKTOP",
+                "MOBILE",
+                "TABLET"
+              ],
+              "items": {
+                "enum": [
+                  "DESKTOP",
+                  "MOBILE",
+                  "TABLET"
+                ],
+                "type": "string",
+                "uniqueItems": true
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043a\u0430\u043a\u0438\u0445 \u0434\u043e\u043c\u0435\u043d\u043e\u0432 \u0432\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u0432 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442. \u0415\u0441\u043b\u0438 \u043d\u0435 \u0437\u0430\u0434\u0430\u0432\u0430\u0442\u044c, \u0442\u043e \u0432\u0435\u0440\u043d\u0435\u0442 \u0441\u0443\u043c\u043c\u0430\u0440\u043d\u043e \u043f\u043e \u0432\u0441\u0435\u043c \u0434\u043e\u043c\u0435\u043d\u0430\u043c",
+            "in": "query",
+            "name": "domains",
+            "required": false,
+            "schema": {
+              "default": [],
+              "items": {
+                "type": "integer",
+                "uniqueItems": true
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u044b\u0435 \u043f\u043e \u043f\u0435\u0440\u0435\u0445\u043e\u0434\u0430\u043c \u0438\u0437 \u043f\u043e\u0438\u0441\u043a\u043e\u0432\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c",
+        "tags": [
+          "Module Traffic"
+        ]
+      }
+    },
+    "/auth": {
+      "post": {
+        "operationId": "app.api.v1.auth.authorize",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "description": "Email \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+                    "example": "user@domain.com",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "\u041f\u0430\u0440\u043e\u043b\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+                    "example": "string",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthUser"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0435 \u0443\u0447\u0435\u0442\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "summary": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c JWT \u0442\u043e\u043a\u0435\u043d",
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "description": "\u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u0442 \u0432\u044b\u0434\u0430\u043d\u043d\u044b\u0439 JWT access_token",
+        "operationId": "app.api.v1.auth.refresh",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "\u0412\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u043d\u043e\u0432\u044b\u0439 access_token \u043d\u043e \u0443\u0436\u0435 \u0431\u0435\u0437 refresh_token"
+          }
+        },
+        "security": [
+          {
+            "jwt-refresh": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c access_token",
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/auth/revoke_access": {
+      "delete": {
+        "description": "\u0411\u043b\u043e\u043a\u0438\u0440\u0443\u0435\u0442 \u0432\u044b\u0434\u0430\u043d\u043d\u044b\u0439 JWT access_token",
+        "operationId": "app.api.v1.auth.revoke_access",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0442\u043e\u0437\u0432\u0430\u0442\u044c access_token",
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/auth/revoke_refresh": {
+      "delete": {
+        "description": "\u0411\u043b\u043e\u043a\u0438\u0440\u0443\u0435\u0442 \u0432\u044b\u0434\u0430\u043d\u043d\u044b\u0439 JWT refresh_token",
+        "operationId": "app.api.v1.auth.revoke_refresh",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          }
+        },
+        "security": [
+          {
+            "jwt-refresh": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0442\u043e\u0437\u0432\u0430\u0442\u044c refresh_token",
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/client": {
+      "get": {
+        "description": "\u0421\u043f\u0438\u0441\u043e\u043a \u0432\u0441\u0435\u0445 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0445 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e",
+        "operationId": "app.api.v1.client.user_clients",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClientUserRole"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u043a\u043b\u0438\u0435\u043d\u0442\u044b",
+        "tags": [
+          "Client"
+        ]
+      },
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u043e\u0433\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0434\u043b\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "private": {
+                    "description": "true \u0435\u0441\u043b\u0438 \u043a\u043b\u0438\u0435\u043d\u0442 - \u0444\u0438\u0437. \u043b\u0438\u0446\u043e; false - \u0438\u043d\u0430\u0447\u0435",
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043d\u043e\u0432\u043e\u0433\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "\u041a\u043b\u0438\u0435\u043d\u0442 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+        "tags": [
+          "Client"
+        ]
+      }
+    },
+    "/client/{client_id}": {
+      "delete": {
+        "description": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+        "responses": {
+          "200": {
+            "description": "\u041a\u043b\u0438\u0435\u043d\u0442 \u0443\u0434\u0430\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041a\u043b\u0438\u0435\u043d\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+        "tags": [
+          "Client"
+        ]
+      },
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043a\u043b\u0438\u0435\u043d\u0442\u0435",
+        "responses": {
+          "200": {
+            "description": "\u041a\u043b\u0438\u0435\u043d\u0442 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041a\u043b\u0438\u0435\u043d\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+        "tags": [
+          "Client"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+          "in": "path",
+          "name": "client_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/domain": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u0434\u043e\u043c\u0435\u043d\u044b \u0432 \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
+        "parameters": [
+          {
+            "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+            "in": "query",
+            "name": "project_id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BaseDomain"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u0434\u043e\u043c\u0435\u043d\u044b \u0432 \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
+        "tags": [
+          "Domain"
+        ]
+      },
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0434\u043e\u043c\u0435\u043d",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "prefix": {
+                    "description": "\u041f\u0440\u0435\u0444\u0438\u043a\u0441 \u0434\u043e\u043c\u0435\u043d\u0430. \u041a\u043e\u043d\u0435\u0447\u043d\u044b\u0439 \u0434\u043e\u043c\u0435\u043d \u0431\u0443\u0434\u0435\u0442 \u0441\u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d \u043a\u0430\u043a \u043f\u0440\u0435\u0444\u0438\u043a + \u043a\u043e\u0440\u043d\u0435\u0432\u043e\u0439 \u0434\u043e\u043c\u0435\u043d \u041f\u0440\u043e\u0435\u043a\u0442\u0430",
+                    "example": "sub.domain.",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430 \u043a \u043a\u043e\u0442\u043e\u0440\u043e\u043c\u0443 \u043f\u0440\u0438\u043a\u0440\u0435\u043f\u0438\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+                    "type": "integer"
+                  },
+                  "scheme": {
+                    "description": "\u041f\u0440\u043e\u0442\u043e\u043a\u043e\u043b \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f (http|https)",
+                    "enum": [
+                      "https",
+                      "http"
+                    ],
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043d\u043e\u0432\u043e\u0433\u043e \u0434\u043e\u043c\u0435\u043d\u0430 (\u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u0430)",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Domain"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Domain"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u0441 \u043a\u043b\u044e\u0447\u043e\u043c (\u043f\u0440\u043e\u0435\u043a\u0442, \u0441\u0445\u0435\u043c\u0430, \u043f\u0440\u0435\u0444\u0438\u043a\u0441) \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+        "tags": [
+          "Domain"
+        ]
+      }
+    },
+    "/domain/{domain_id}": {
+      "delete": {
+        "description": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+        "responses": {
+          "200": {
+            "description": "\u0414\u043e\u043c\u0435\u043d \u0443\u0434\u0430\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+        "tags": [
+          "Domain"
+        ]
+      },
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u0434\u043e\u043c\u0435\u043d\u0435",
+        "parameters": [
+          {
+            "description": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432\u0441\u0435 \u043f\u043e\u043b\u044f",
+            "in": "query",
+            "name": "detailed",
+            "required": false,
+            "schema": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/BaseDomain"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Domain"
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+        "tags": [
+          "Domain"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u0434\u043e\u043c\u0435\u043d\u0430",
+          "in": "path",
+          "name": "domain_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "put": {
+        "description": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u044b\u0435 \u0434\u043e\u043c\u0435\u043d\u0430.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "g_creds_id": {
+                    "description": "ID google \u0442\u043e\u043a\u0435\u043d\u0430",
+                    "example": 1,
+                    "nullable": true,
+                    "type": "integer"
+                  },
+                  "update_search_visits": {
+                    "description": "\u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043e\u0442\u0441\u043b\u0435\u0436\u0438\u0432\u0430\u043d\u0438\u0435 \u043f\u0435\u0440\u0435\u0445\u043e\u0434\u043e\u0432 \u0438\u0437 \u043f\u043e\u0438\u0441\u043a\u043e\u0432\u044b\u0445 \u0441\u0438\u0441\u0442\u0435\u043c",
+                    "type": "boolean"
+                  },
+                  "y_creds_id": {
+                    "description": "ID yandex \u0442\u043e\u043a\u0435\u043d\u0430",
+                    "example": 1,
+                    "nullable": true,
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u041d\u043e\u0432\u044b\u0435 \u0430\u0442\u0442\u0440\u0438\u0431\u0443\u0442\u044b"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Domain"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d/\u0442\u043e\u043a\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0438\u043b\u0438 \u043d\u0435\u0442 \u043f\u0440\u0430\u0432 \u0434\u043e\u0441\u0442\u0443\u043f\u0430"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0434\u043e\u043c\u0435\u043d",
+        "tags": [
+          "Domain"
+        ]
+      }
+    },
+    "/oauth2/callback": {
+      "get": {
+        "operationId": "app.api.v1.oauth2.callback",
+        "responses": {
+          "201": {
+            "description": "\u041d\u043e\u0432\u044b\u0439 \u0442\u043e\u043a\u0435\u043d \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043f\u043e\u043b\u0443\u0447\u0435\u043d"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041e\u0448\u0438\u0431\u043a\u0430 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438 \u043d\u0430 \u0441\u0442\u043e\u0440\u043e\u043d\u0435 \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u0430"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 state"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 provider"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "tags": [
+          "OAuth2"
+        ]
+      }
+    },
+    "/oauth2/privacy": {
+      "get": {
+        "operationId": "app.api.v1.oauth2.privacy",
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438"
+          }
+        },
+        "tags": [
+          "OAuth2"
+        ]
+      }
+    },
+    "/oauth2/request": {
+      "get": {
+        "operationId": "app.api.v1.oauth2.auth_request",
+        "parameters": [
+          {
+            "description": "\u041f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440 \u0434\u0430\u043d\u043d\u044b\u0445",
+            "in": "query",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "enum": [
+                "google",
+                "yandex"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "\u0420\u0435\u0434\u0438\u0440\u0435\u043a\u0442 \u043d\u0430 Yandex \u0438\u043b\u0438 Google \u0434\u043b\u044f \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0434\u043e\u0441\u0442\u0443\u043f\u0430"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442 Google \u0442\u043e\u043a\u0435\u043d"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 provider"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "tags": [
+          "OAuth2"
+        ]
+      }
+    },
+    "/oauth2/revoke": {
+      "get": {
+        "operationId": "app.api.v1.oauth2.revoke",
+        "parameters": [
+          {
+            "description": "\u041f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440 \u0434\u0430\u043d\u043d\u044b\u0445",
+            "in": "query",
+            "name": "provider",
+            "required": true,
+            "schema": {
+              "enum": [
+                "google",
+                "yandex"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID \u0442\u043e\u043a\u0435\u043d\u0430",
+            "in": "query",
+            "name": "token_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "\u0422\u043e\u043a\u0435\u043d \u043e\u0442\u043e\u0437\u0432\u0430\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0422\u043e\u043a\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0432 \u0431\u0430\u0437\u0435"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u044b\u0439 provider"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043d\u0430 \u0441\u0442\u043e\u0440\u043e\u043d\u0435 \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u0430"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "tags": [
+          "OAuth2"
+        ]
+      }
+    },
+    "/oauth2/terms": {
+      "get": {
+        "operationId": "app.api.v1.oauth2.terms",
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043b\u043e\u0432\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f"
+          }
+        },
+        "tags": [
+          "OAuth2"
+        ]
+      }
+    },
+    "/project": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0441 \u0434\u043e\u043c\u0435\u043d\u0430\u043c\u0438",
+        "parameters": [
+          {
+            "description": "ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+            "in": "query",
+            "name": "client_id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
+        "tags": [
+          "Project"
+        ]
+      },
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u043f\u0440\u043e\u0435\u043a\u0442",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "client_id": {
+                    "description": "ID \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u043a \u043a\u043e\u0442\u043e\u0440\u043e\u043c\u0443 \u043f\u0440\u0438\u043a\u0440\u0435\u043f\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "description": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430 (\u043e\u043f\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u043e)",
+                    "type": "string"
+                  },
+                  "root_domain": {
+                    "description": "\u041a\u043e\u0440\u043d\u0435\u0432\u043e\u0439 \u0434\u043e\u043c\u0435\u043d \u043f\u0440\u043e\u0435\u043a\u0442\u0430. \u0417\u0430\u043f\u0440\u0435\u0449\u0435\u043d\u044b \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u044f \u0434\u043e\u043c\u0435\u043d\u043e\u0432 \u0441 www. \u041f\u0440\u0438 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u0438, \u0441\u043e\u0437\u0434\u0430\u0435\u0442\u0441\u044f \u0441\u043e\u043e\u0442\u0432\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u0434\u043e\u043c\u0435\u043d \u0441 \u043f\u0440\u0435\u0444\u0438\u043a\u0441\u043e\u043c www",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/project/{project_id}": {
+      "delete": {
+        "description": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+        "responses": {
+          "200": {
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u0443\u0434\u0430\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+        "tags": [
+          "Project"
+        ]
+      },
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
+        "responses": {
+          "200": {
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+        "tags": [
+          "Project"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "put": {
+        "description": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u044b\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "brand_queries": {
+                    "description": "\u0421\u043f\u0438\u0441\u043e\u043a \u0431\u0440\u0435\u043d\u0434\u043e\u0432\u044b\u0445 \u0437\u0430\u043f\u0440\u043e\u0441\u043e\u0432",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "\u041d\u043e\u0432\u043e\u0435 \u0438\u043c\u044f \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u041d\u043e\u0432\u044b\u0435 \u0430\u0442\u0442\u0440\u0438\u0431\u0443\u0442\u044b"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442/\u0442\u043e\u043a\u0435\u043d \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0438\u043b\u0438 \u043d\u0435\u0442 \u043f\u0440\u0430\u0432 \u0434\u043e\u0441\u0442\u0443\u043f\u0430"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043f\u0440\u043e\u0435\u043a\u0442",
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/project/{project_id}/frq_conf": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u043a\u043e\u043d\u0444\u0438\u0433\u0438 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "operationId": "app.api.v1.frq_conf.search",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FrequencyParserConfig"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u043a\u043e\u043d\u0444\u0438\u0433\u0438 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "tags": [
+          "FrequencyParser",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "post": {
+        "description": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433 \u043f\u0430\u0440\u0441\u0435\u0440\u0430 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438 \u043a \u043f\u0440\u043e\u0435\u043a\u0442\u0443",
+        "operationId": "app.api.v1.frq_conf.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "device": {
+                    "description": "\u0423\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u043e",
+                    "enum": [
+                      "all",
+                      "desktop",
+                      "tablet_phone",
+                      "tablet",
+                      "phone"
+                    ],
+                    "type": "string"
+                  },
+                  "regions": {
+                    "description": "\u0420\u0435\u0433\u0438\u043e\u043d \u0432\u044b\u0434\u0430\u0447\u0438",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrequencyParserConfig"
+                }
+              }
+            },
+            "description": "\u041a\u043e\u043d\u0444\u0438\u0433 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438",
+        "tags": [
+          "FrequencyParser",
+          "Visibility"
+        ]
+      }
+    },
+    "/project/{project_id}/frq_conf/{frq_conf_id}": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043a\u043e\u043d\u0444\u0438\u0433\u0435",
+        "operationId": "app.api.v1.frq_conf.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrequencyParserConfig"
+                }
+              }
+            },
+            "description": "\u041a\u043e\u043d\u0444\u0438\u0433 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433",
+        "tags": [
+          "FrequencyParser",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        },
+        {
+          "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+          "in": "path",
+          "name": "frq_conf_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/project/{project_id}/pos_conf": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u043a\u043e\u043d\u0444\u0438\u0433\u0438 \u043f\u043e\u0437\u0438\u0446\u0438\u0439 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "operationId": "app.api.v1.pos_conf.search",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PositionParserConfig"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u043a\u043e\u043d\u0444\u0438\u0433\u0438 \u043f\u043e\u0437\u0438\u0446\u0438\u0439 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "tags": [
+          "PositionParser",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "post": {
+        "description": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433 \u043f\u0430\u0440\u0441\u0435\u0440\u0430 \u043f\u043e\u0437\u0438\u0446\u0438\u0439 \u043a \u043f\u0440\u043e\u0435\u043a\u0442\u0443",
+        "operationId": "app.api.v1.pos_conf.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "device": {
+                    "description": "\u0423\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u043e",
+                    "enum": [
+                      "desktop",
+                      "tablet_android",
+                      "tablet_ios",
+                      "mobile_android",
+                      "mobile_ios"
+                    ],
+                    "type": "string"
+                  },
+                  "language": {
+                    "description": "\u042f\u0437\u044b\u043a",
+                    "example": "ru",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "\u0420\u0435\u0433\u0438\u043e\u043d \u0432\u044b\u0434\u0430\u0447\u0438",
+                    "example": "\u041c\u043e\u0441\u043a\u0432\u0430",
+                    "type": "string"
+                  },
+                  "search_engine": {
+                    "description": "\u041f\u043e\u0438\u0441\u043a\u043e\u0432\u043e\u0439 \u0434\u0432\u0438\u0436\u043e\u043a",
+                    "example": "yandex",
+                    "type": "string"
+                  },
+                  "search_engine_host": {
+                    "description": "\u0425\u043e\u0441\u0442 \u0434\u0432\u0438\u0436\u043a\u0430",
+                    "example": "yandex.ru",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PositionParserConfig"
+                }
+              }
+            },
+            "description": "\u041a\u043e\u043d\u0444\u0438\u0433 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433 \u043f\u043e\u0437\u0438\u0446\u0438\u0439",
+        "tags": [
+          "PositionParser",
+          "Visibility"
+        ]
+      }
+    },
+    "/project/{project_id}/pos_conf/{pos_conf_id}": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043a\u043e\u043d\u0444\u0438\u0433\u0435",
+        "operationId": "app.api.v1.pos_conf.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PositionParserConfig"
+                }
+              }
+            },
+            "description": "\u041a\u043e\u043d\u0444\u0438\u0433 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043a\u043e\u043d\u0444\u0438\u0433",
+        "tags": [
+          "PositionParser",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        },
+        {
+          "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430",
+          "in": "path",
+          "name": "pos_conf_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/project/{project_id}/preset": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u043f\u0440\u0435\u0441\u0435\u0442\u044b \u0432\u0438\u0434\u0438\u043c\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "operationId": "app.api.v1.vis_preset.search",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VisibilityPreset"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041f\u0440\u0435\u0441\u0435\u0442 \u0432\u0438\u0434\u0438\u043c\u043e\u0441\u0442\u0438 ",
+        "tags": [
+          "Preset",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u043f\u0440\u0435\u0441\u0435\u0442 \u0432\u0438\u0434\u0438\u043c\u043e\u0441\u0442\u0438",
+        "operationId": "app.api.v1.vis_preset.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "f_conf_id": {
+                    "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430 \u0447\u0430\u0441\u0442\u043e\u0442\u043d\u043e\u0441\u0442\u0438",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "p_conf_id": {
+                    "description": "ID \u043a\u043e\u043d\u0444\u0438\u0433\u0430 \u043f\u043e\u0437\u0438\u0446\u0438\u0439",
+                    "example": 1,
+                    "type": "integer"
+                  },
+                  "structure_id": {
+                    "description": "ID \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0441\u043b\u043e\u0432",
+                    "example": 1,
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisibilityPreset"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u0435\u0441\u0435\u0442 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u0435\u0441\u0435\u0442 \u0441 \u0442\u0430\u043a\u043e\u0439 \u043a\u043e\u043d\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u0435\u0439 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u043f\u0440\u0435\u0441\u0435\u0442 \u0432\u0438\u0434\u0438\u043c\u043e\u0441\u0442\u0438",
+        "tags": [
+          "Preset",
+          "Visibility"
+        ]
+      }
+    },
+    "/project/{project_id}/preset/{preset_id}": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043f\u0440\u0435\u0441\u0435\u0442\u0435",
+        "operationId": "app.api.v1.vis_preset.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisibilityPreset"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u0435\u0441\u0435\u0442 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u0438\u043b\u0438 \u043f\u0440\u0435\u0441\u0435\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043f\u0440\u0435\u0441\u0435\u0442",
+        "tags": [
+          "Preset",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        },
+        {
+          "description": "ID \u043f\u0440\u0435\u0441\u0435\u0442\u0430",
+          "in": "path",
+          "name": "preset_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/project/{project_id}/structure": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0444\u0440\u0430\u0437 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "operationId": "app.api.v1.structure.search",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VisibilityStructure"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0444\u0440\u0430\u0437 \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "tags": [
+          "Structure",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u0443\u044e \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0443. \u041e\u043f\u0438\u0446\u043e\u043d\u0430\u043b\u044c\u043d\u043e \u043c\u043e\u0436\u043d\u043e \u0441\u0440\u0430\u0437\u0443 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0441\u043f\u0438\u0441\u043e\u043a \u043a\u043b\u044e\u0447\u0435\u0439.",
+        "operationId": "app.api.v1.structure.post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "description": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b",
+                    "example": "\u0421\u043b\u043e\u0432\u0430 2020 \u0442\u043e\u043f",
+                    "type": "string"
+                  },
+                  "queries": {
+                    "description": "\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0438\u0441\u043a\u043e\u0432\u044b\u0445 \u0444\u0440\u0430\u0437",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisibilityStructure"
+                }
+              }
+            },
+            "description": "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0430"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0421\u0442\u0440\u0443\u043a\u0442\u0446\u0440\u0430 \u0441 \u0442\u0430\u043a\u0438\u043c \u0438\u043c\u0435\u043d\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u0438\u043c\u044f"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u0443\u044e \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0443 \u0444\u0440\u0430\u0437",
+        "tags": [
+          "Structure",
+          "Visibility"
+        ]
+      }
+    },
+    "/project/{project_id}/structure/{structure_id}": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0435",
+        "operationId": "app.api.v1.structure.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisibilityStructure"
+                }
+              }
+            },
+            "description": "\u041a\u043e\u043d\u0444\u0438\u0433 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0435\u043a\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0443",
+        "tags": [
+          "Structure",
+          "Visibility"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+          "in": "path",
+          "name": "project_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        },
+        {
+          "description": "ID \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b",
+          "in": "path",
+          "name": "structure_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/segment": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0432\u0441\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u044b \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "parameters": [
+          {
+            "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430 \u0434\u043b\u044f \u043a\u043e\u0442\u043e\u0440\u043e\u0433\u043e \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u044c \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u044b",
+            "in": "query",
+            "name": "project_id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceSegment"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0412\u0441\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u044b \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+        "tags": [
+          "Segment"
+        ]
+      },
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "description": "\u0418\u043c\u044f \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430",
+                    "example": "\u0411\u043e\u0442\u0438\u043d\u043a\u0438",
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "ID \u043f\u0440\u043e\u0435\u043a\u0442\u0430",
+                    "example": 3,
+                    "type": "integer"
+                  },
+                  "regex": {
+                    "description": "\u0420\u0435\u0433\u0443\u043b\u044f\u0440\u043d\u043e\u0435 \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
+                    "example": "shoes",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceSegment"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u0441 \u0442\u0430\u043a\u0438\u043c regex \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442 \u0434\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0430"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u044b\u0439 \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "tags": [
+          "Segment"
+        ]
+      }
+    },
+    "/segment/{segment_id}": {
+      "delete": {
+        "description": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "responses": {
+          "200": {
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u0443\u0434\u0430\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "tags": [
+          "Segment"
+        ]
+      },
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0435",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceSegment"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u0438\u043b\u0438 \u0441\u0435\u0433\u043c\u0435\u043d\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "tags": [
+          "Segment"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430",
+          "in": "path",
+          "name": "segment_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ],
+      "put": {
+        "description": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0434\u0430\u043d\u043d\u044b\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "description": "\u0418\u043c\u044f \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430",
+                    "type": "string"
+                  },
+                  "regex": {
+                    "description": "\u0420\u0435\u0433\u0443\u043b\u044f\u0440\u043d\u043e\u0435 \u0432\u044b\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u041d\u043e\u0432\u044b\u0435 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u044b"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceSegment"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0414\u043e\u043c\u0435\u043d \u0438\u043b\u0438 \u0441\u0435\u0433\u043c\u0435\u043d\u0442 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0421\u0435\u0433\u043c\u0435\u043d\u0442 \u0441 \u0442\u0430\u043a\u0438\u043c regex \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442 \u0434\u043b\u044f \u044d\u0442\u043e\u0433\u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0430"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0441\u0435\u0433\u043c\u0435\u043d\u0442",
+        "tags": [
+          "Segment"
+        ]
+      }
+    },
+    "/user": {
+      "post": {
+        "description": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "description": "Email \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0434\u043b\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438",
+                    "example": "user@domain.com",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "\u0418\u043c\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "\u041f\u0430\u0440\u043e\u043b\u044c",
+                    "type": "string"
+                  },
+                  "second_name": {
+                    "description": "\u0424\u0430\u043c\u0438\u043b\u0438\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "\u0414\u0430\u043d\u043d\u044b\u0435 \u043d\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthUser"
+                }
+              }
+            },
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u0441\u043e\u0437\u0434\u0430\u043d"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0412\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435"
+          }
+        },
+        "summary": "\u0421\u043e\u0437\u0434\u0430\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/{user_id}": {
+      "delete": {
+        "description": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "responses": {
+          "200": {
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u0443\u0434\u0430\u043b\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "tags": [
+          "User"
+        ]
+      },
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u0435",
+        "responses": {
+          "200": {
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0430\u0439\u0434\u0435\u043d"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0417\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+        "tags": [
+          "User"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/user/{user_id}/{provider}/sites": {
+      "get": {
+        "description": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0441\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u043d\u044b\u0445 \u0441\u0430\u0439\u0442\u043e\u0432 \u0434\u043b\u044f \u0442\u043e\u043a\u0435\u043d\u0430",
+        "operationId": "app.api.v1.user.provider_sites",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "example": "https://example.com",
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "\u0423\u0441\u043f\u0435\u0445"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0423\u0447\u0435\u0442\u043d\u0430\u044f \u0437\u0430\u043f\u0438\u0441\u044c \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u0430 \u0438\u043b\u0438 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u044b"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u041f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440 \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442"
+          },
+          "520": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "\u0423\u0447\u0435\u0442\u043d\u0430\u044f \u0437\u0430\u043f\u0438\u0441\u044c \u043f\u0440\u043e\u0432\u0430\u0439\u0434\u0435\u0440\u0430 \u0438\u043b\u0438 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u044b"
+          }
+        },
+        "security": [
+          {
+            "jwt": [
+              "secret"
+            ]
+          }
+        ],
+        "summary": "\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u043d\u044b\u0445 \u0441\u0430\u0439\u0442\u043e\u0432",
+        "tags": [
+          "User"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ID \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "schema": {
+            "format": "integer",
+            "type": "integer"
+          }
+        },
+        {
+          "description": "ID \u0442\u043e\u043a\u0435\u043d\u0430",
+          "in": "query",
+          "name": "token_id",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "description": "\u0410\u043d\u0430\u043b\u0438\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u0430",
+          "in": "path",
+          "name": "provider",
+          "required": true,
+          "schema": {
+            "enum": [
+              "google",
+              "yandex"
+            ],
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ]
+}
